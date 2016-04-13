@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+
+
+{% block head_extra %} 
+{{ form.media }}
+{% endblock head_extra %}
+
+
+
+{% block content %}
+<div class="row">
+<div class='col-sm-6 col-sm-offset-3'>	
+<h1>Form</h1>
+
+<form method='POST' action='' enctype='multipart/form-data'>{% csrf_token %}
+{{ form.as_p }}
+<input type='submit' value='Create Post' />
+</form>
+
+
+{% if instance.industry_type == 'Retail' %}
+<a href="{% url 'delete' slug=instance.slug %}" class="btn btn-info pull-right" role="button">Delete</a>
+{% elif instance.industry_type == 'Banking' %}
+<a href="{% url 'banking_delete' slug=instance.slug %}" class="btn btn-info pull-right" role="button">Delete</a>
+{% elif instance.industry_type == 'Social Network' %}
+<a href="{% url 'social_delete' slug=instance.slug %}" class="btn btn-info pull-right" role="button">Delete</a>
+{% elif instance.industry_type == 'Real Estate' %}
+<a href="{% url 'real_delete' slug=instance.slug %}" class="btn btn-info pull-right" role="button">Delete</a>
+{% elif instance.industry_type == 'Travel' %}
+<a href="{% url 'travel_delete' slug=instance.slug %}" class="btn btn-info pull-right" role="button">Delete</a>
+{% elif instance.industry_type == 'HealthCare' %}
+<a href="{% url 'health_delete' slug=instance.slug %}" class="btn btn-info pull-right" role="button">Delete</a>
+
+{% endif %}
+
+</div>
+
+
+{% endblock content %}

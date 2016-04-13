@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% block head_title %}Banking{% endblock head_title %}
+
+{% block content %}
+
+
+
+
+
+
+<div class="row">
+	<!-- Blog Entries Column -->
+            <!--<div class="col-md-6 col-md-offset-2">-->
+            <div class="col-md-8">
+                <h1 class="page-header">
+                    {{ title }}
+                    <small>Industry</small>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'banking_create' %}" class="btn btn-success pull-right" role="button">Post a Tableau!</a>
+                    {% endif %}
+                    
+                </h1>
+
+    <!-- If there is Tableau about Banking Industry -->
+    <!--{% if object_list.industry_type == 'Banking' %}-->
+
+
+                <!-- First Blog Post -->
+    		<div class="row">
+                {% for obj in object_list %}
+            <div class="col-md-12">
+                <h2>
+                    {% if obj.draft %}<h3>Staff Only: Draft</h3> {% if obj.publish > today %}<h3>Staff Only: Future Post {% endif %}</h3>{% endif %}
+        			<h3><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3>
+                </h2>
+                <p class="lead">
+                	{% if obj.user.get_full_name %}<p>by {{ obj.user.get_full_name }}</p>{% endif %}
+                </p>
+                <p><span class="glyphicon glyphicon-time"></span> Posted on {{ obj.publish }}</p>
+
+                <hr>
+
+                <!-- image -->
+            <div class="col-md-6">
+                {% if obj.image %}
+				<img src='{{ obj.image.url }}' width='600px' height='100px' class='img-responsive' />
+				{% endif %}
+			</div>
+
+				<!-- content -->
+			<div class="col-md-6">
+                <p class='content-markdown'>{{ obj.content|truncatechars:100 }}</p>
+                <br>
+                <p><a href='{{ obj.get_absolute_url }}' class="btn btn-primary" role="button">View Tableau <span class="glyphicon glyphicon-chevron-right"></span></a></p>
+        	</div>
+
+    		<hr>
+                
+            </div>
+            <hr>
+
+                {% endfor %}
+
+            <hr>
+
+            </div>
+            
+
+            
+
+
+                <!-- Paginator -->
+                <div class="pagination">
+				<span class="step-links">
+					{% if object_list.has_previous %}
+					<a href="?page={{ object_list.previous_page_number }}">previous</a>
+					{% endif %}
+
+				<span class="current">
+					Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+				</span>
+
+					{% if object_list.has_next %}
+					<a href="?page={{ object_list.next_page_number }}">next</a>
+					{% endif %}
+				</span>
+				</div>
+
+            </div>
+            <!-- /.col-md-8 -->
+
+    <!--{% endif %}-->
+    <!-- End tableau about Banking industry -->
+
+
+            <br/>
+            <br/>
+            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4 pull-right">
+
+
+                <!-- Blog Search Well 
+                <div class="well">
+                    <h4>Tableau Search</h4>
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                        </span>
+                    </div>
+               </div>-->
+
+                <!-- Blog Categories Well 
+                <div class="well">
+                    <h4>Blog Categories</h4>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled">
+                                <li><a href="#">Category Name</a>
+                                </li>
+                                <li><a href="#">Category Name</a>
+                                </li>
+                                <li><a href="#">Category Name</a>
+                                </li>
+                                <li><a href="#">Category Name</a>
+                                </li>
+                            </ul>
+                        </div>
+                         /.col-lg-6 
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled">
+                                <li><a href="#">Category Name</a>
+                                </li>
+                                <li><a href="#">Category Name</a>
+                                </li>
+                                <li><a href="#">Category Name</a>
+                                </li>
+                                <li><a href="#">Category Name</a>
+                                </li>
+                            </ul>
+                        </div>
+                         /.col-lg-6 
+                    </div>
+                     /.row 
+                </div>
+                 /.well -->
+
+                <!-- Side Widget Well 
+                <div class="well">
+                    <h4>Side Widget Well</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+                </div>
+            -->
+
+            </div>
+            <!-- /.col-md-4-->
+
+
+
+<!--
+{% cycle "" "<div class='col-sm-12'><hr/></div></div><div class='row'>" %}
+-->
+
+
+</div>
+<!-- /.row -->
+
+
+{% endblock content %}

@@ -1,0 +1,84 @@
+{% extends "tips/basic_main.html" %}
+{% block head_title %}{{ title }}{% endblock head_title %}
+
+{% block content %}
+
+<div class="container">
+<div class="row">
+	{% for obj in object_list %}
+
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+	<div class="post-preview">
+
+			{% if obj.blog_type == 'Basic Steps' %}
+            <a href="{{ obj.basic_url }}">
+        	{% elif obj.blog_type == 'Tableau Concepts' %}
+        	<a href="{{ obj.concepts_url }}">
+    		{% elif obj.blog_type == 'Simple Techniques' %}
+    		<a href="{{ obj.techniques_url }}">
+			{% elif obj.blog_type == 'Tableau Desktop' %}
+    		<a href="{{ obj.desktop_url }}">
+			{% elif obj.blog_type == 'Tips' %}
+    		<a href="{{ obj.tips_url }}">
+
+        	{% endif %}
+
+
+                <h2 class="post-title">
+                	{% if obj.draft %}<h3>Staff Only: Draft</h3> {% if obj.publish > today %}<h3>Staff Only: Future Post {% endif %}</h3>{% endif %}
+
+                    {{ obj.title }}
+                </h2>
+                <h3 class="post-subtitle">
+                    <p class='content-markdown'>{{ obj.content|truncatechars:100 }}</p>
+                </h3>
+            </a>
+            <p class="post-meta">Posted by {% if obj.user.get_full_name %}{{ obj.user.get_full_name }}{% endif %} on {{ obj.publish }}</p>
+    
+    </div>
+    <hr>
+</div>
+
+
+	{% endfor %}
+
+
+
+		
+
+</div>
+
+
+
+
+    <!-- Paginator -->
+            <div class="row text-center">
+                <div class="pagination">
+				<span class="step-links">
+
+                    <nav>
+                    <ul class="pager">
+					{% if object_list.has_previous %}
+					<li><a href="?page={{ object_list.previous_page_number }}">previous</a></li>
+					{% endif %}
+
+
+				<span class="current">
+					Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}
+				</span>
+
+					{% if object_list.has_next %}
+					<li><a href="?page={{ object_list.next_page_number }}">next</a></li>
+					{% endif %}
+                    </ul>
+                    </nav>
+
+				</span>
+				</div>
+            </div>
+            <!-- /.row text-center -->
+</div>
+<!-- End Container -->
+
+{% endblock content %}

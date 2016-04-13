@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+
+
+{% block head_title %}{{ instance.title }} | {{ block.super }}{% endblock head_title %}
+
+
+<style>
+{% block style %}
+h1 {
+	color: #777777;
+}
+{% endblock style %}
+</style>
+
+
+
+{% block content %}
+<!--<div class='col-sm-6 col-sm-offset-3'>-->
+
+
+
+<div class='col-sm-12'><!--
+	{% if instance.image %}
+	<img src='{{ instance.image.url }}' class='img-responsive' />
+	{% endif %}
+	-->	
+<h1><b>{{ title }}</b> <small>{% if instance.draft %}<span style='color:red;'>Draft</span>{% endif %}</small></h1>
+{% if instance.user.get_full_name %}
+
+<!--<p>Author: {{ instance.user.get_full_name }}</p>-->
+{% endif %}
+
+<p>
+	<!-- Facebook Like and Share buttons
+<div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+-->
+{% if user.is_authenticated %}
+<a href="{% url 'travel_update' slug=instance.slug %}" class="btn btn-info pull-right" role="button">Edit</a>
+{% endif %}
+</p>
+<br/>
+<!--
+<br/>
+<hr/>
+-->
+
+{% if instance.embed_code %}
+{{ instance.embed_code|safe }}
+{% endif %}
+
+{% if instance.title == 'tesla' %}
+<script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1004px; height: 869px;'><noscript><a href='#'><img alt='UK Bank Customers in 2015 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;UK&#47;UK_Bank_Customers_0&#47;UKBankCustomersin2015&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1004' height='869' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='UK_Bank_Customers_0&#47;UKBankCustomersin2015' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;UK&#47;UK_Bank_Customers_0&#47;UKBankCustomersin2015&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showTabs' value='y' /></object></div>
+
+{% elif instance.title == 'aibnb two' %}
+<script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1004px; height: 869px;'><noscript><a href='#'><img alt='Analysis of Company TT ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;An&#47;AnalysisofCompanyTT&#47;AnalysisofCompanyTT&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1004' height='869' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='AnalysisofCompanyTT&#47;AnalysisofCompanyTT' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;An&#47;AnalysisofCompanyTT&#47;AnalysisofCompanyTT&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showTabs' value='y' /></object></div>
+{% endif %}
+
+
+
+
+
+
+<!-- for Social Sharing -->
+<!--
+<p>
+<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
+Facebook
+</a>
+
+<a href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}">
+Twitter
+</a>
+</p>
+-->
+<div class='row'>
+	<div class='col-sm-12'>
+
+		<div class="content-markdown">{{ instance.content }}</div>
+
+		<hr/>
+		<br/>
+<!-- Facebook Comments
+<div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div>
+-->
+		</div>
+	</div>
+
+</div>
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,143 @@
+<html>
+<head>
+	<title>{% block head_title %}Hello{% endblock head_title %}</title>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<style>
+{% block style %}{% endblock style %}
+footer {
+  color: white;
+  padding: 25px 0;
+  background-color: #233140;
+}
+
+footer b {
+	color: black;
+}
+
+.wmd-panel{
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+
+</style>
+
+{% block head_extra %} {% endblock head_extra %}
+
+
+</head>
+<body>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'home_page' %}">Portfolio</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="{% url 'basic_list' %}">Tableau Tips</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#">Tableau Events</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="{% url 'about_me' %}">About Author</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+
+<!-- space between navigation and contents-->
+<br/>	
+<br/>
+<!-- End space -->
+
+<br/>
+{% include "messages_display.html" %}
+<div class='container'>
+{% block content %}
+{% endblock content %}
+</div>
+
+
+<!-- Footer -->
+<footer class="text-center">
+	<div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <b>Created by  </b> Cheonmyung Ro
+                    </div>
+                </div>
+            </div>
+    </div>
+</footer>
+
+<!-- Latest compiled and minified JavaScript -->
+
+<!-- from this website, jQuery cdn -->
+<script src="http://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="   crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<!-- from this website, https://cdnjs.com/libraries/marked -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js'></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".content-markdown").each(function(){
+        var content = $(this).text()
+        console.log(content)
+        var markedContent = marked(content)
+        console.log(markedContent)
+        $(this).html(markedContent)
+    })
+    $(".content-markdown img").each(function(){
+        $(this).addClass("img-responsive");
+    })
+
+})
+
+</script>
+
+
+</body>
+</html>
+
+
+
+

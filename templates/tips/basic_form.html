@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+
+
+{% block head_extra %} 
+{{ form.media }}
+{% endblock head_extra %}
+
+
+
+{% block content %}
+<div class="row">
+<div class='col-sm-6 col-sm-offset-3'>	
+<h1>Form</h1>
+
+<form method='POST' action='' enctype='multipart/form-data'>{% csrf_token %}
+{{ form.as_p }}
+<input type='submit' value='Create Post' />
+</form>
+
+{% if instance.blog_type == 'Basic Steps' %}
+<a href="{% url 'basic_delete' slug=instance.slug %}" class="btn btn-info pull-right" role="button">Delete</a>
+{% elif instance.blog_type == 'Tableau Concepts' %}
+<a href="{% url 'concepts_delete' slug=instance.slug %}" class="btn btn-info pull-right" role="button">Delete</a>
+{% elif instance.blog_type == 'Simple Techniques' %}
+<a href="{% url 'techniques_delete' slug=instance.slug %}" class="btn btn-info pull-right" role="button">Delete</a>
+{% elif instance.blog_type == 'Tableau Desktop' %}
+<a href="{% url 'desktop_delete' slug=instance.slug %}" class="btn btn-info pull-right" role="button">Delete</a>
+{% elif instance.blog_type == 'Tips' %}
+<a href="{% url 'tips_delete' slug=instance.slug %}" class="btn btn-info pull-right" role="button">Delete</a>
+
+{% endif %}
+
+
+</div>
+
+
+{% endblock content %}
